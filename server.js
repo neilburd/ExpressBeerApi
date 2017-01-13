@@ -50,6 +50,23 @@ router.route('/beers')
       })
   })
 
+// index
+  .get(function(req, res) {
+    Beer.find().then(function(beers){
+      res.json(beers);
+    });
+  });
+
+router.route('/beers/:beer_id')
+
+  // show
+
+  // update
+
+  // destroy
+
+
+
 router.get("/routes", function(req, res){
   console.log(router.stack);
   res.json(router.stack);
