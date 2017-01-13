@@ -43,7 +43,20 @@ What is the command to install a package, and then save it to our package.json?
 
 > $npm install --save mongoose express body-parser
 
-Then, within server.js, setup Mongoose, Express and body-parser to handle POSTed data.
+Then, within server.js, setup Mongoose, Express and body-parser to handle POSTed data. Also connect to your mongo database by calling `mongoose.connect`:
+
+```
+var bodyParser = require('body-parser');
+
+var mongoose = require("mongoose");
+
+mongoose.connect('mongodb://localhost/beer_api')
+
+// configure app to use bodyParser()
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+```
+
 
 ## Step 2 - Plan our model
 
@@ -51,11 +64,22 @@ We are going to create one model to start off with, called Beer. The Beer model 
 
 Create the model in the app/models directory.
 
-Try to write the schema and model setup code from memory before looking at the solution below:
+### Try to write the schema and model setup code from memory before looking at the solution below
 
 
 
 ```
+/*
+*
+*
+*
+*
+* SPOILER ALERT!
+*
+*
+*
+*
+*/
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
@@ -68,9 +92,25 @@ var BeerSchema = new Schema({
 module.exports = mongoose.model('Beer', BeerSchema);
 ```
 
+Now that you have exported (exposed) this model, where should you then call `require` along with the name of the model?
+
 ## Step 3 - CRUD!
 
 We are going to use the Express Router to help define our routes. The first set of routes we are going to create are the index and create route, which both will be at `/api/beers`
+
+To
+
+Before we get started, take a look at the `router.use` call. That middleware gets called each time a route is visited, and is a good place for something like user authentication. We are not going to cover that today, but it would be something good to investigate, as you don't want anyone hacking your beer collection!
+
+The call to `next()` goes to the next matching middleware, in this case, our RESTful routes that we are going to setup. If you notice your app is hanging, then somewhere, some middleware may not be passing on to the next piece of middleware. Read more about Express middleware [here](http://expressjs.com/en/guide/using-middleware.html)
+
+So ***if you want something to happen on every request, implement `router.use`***!
+
+## Break!
+
+## Implementing CRUD
+
+Working in groups of 2-3, implement the following CRUD actions. When you are ready to test an action out, fire up Postman and get the api response.
 
 ### Routes with /api/beers
 
@@ -101,6 +141,10 @@ By calling this command on the model, and passing a key: value pair, we can remo
 ## Step 4 - Test!
 
 Use Postman or cURL to make requests to the api. If you are console logging, check the server output. For `GET` requests, you can use the browser.
+
+For POSTing data, make sure you are using `x-www-form-urlencoded`
+
+Namespacing form data can be achieved by typing beer[name] as a key, for example. Then you have access to `req.body.beer`.
 
 ## Bonus: Deploy to Heroku
 
