@@ -8,7 +8,13 @@ var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var mongoose   = require('mongoose');
+var Beer       = require('./app/models/beer'); // require beer.js
 
+mongoose.connect('mongodb://localhost/beer_api');
+
+// configure app to use bodyParser()
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // set up a variable to hold our model here...
 
@@ -27,6 +33,7 @@ router.use(function(req, res, next) {
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res) {
   res.json({ message: 'Welcome to the beer api!' });
+
 });
 
 // more routes for our API will happen here
@@ -35,11 +42,14 @@ router.route('/beers')
 // create
   .post(function(req, res) {
     // code here
+    Beer.create(req.body.beer).then((beer) => {
+      res.send(beer);
+    })
   })
 
 // index
   .get(function(req, res) {
-    // code here
+    // res.send(  );
   });
 
 

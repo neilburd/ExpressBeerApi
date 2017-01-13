@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Coors",
+    "kind": "crap",
+    "price": 5
+  },
+  {
+    "name": "2 Roads",
+    "kind": "good",
+    "price": 9
+  },
+  {
+    "name": "Trinity IPA",
+    "kind": "Good",
+    "price": 10
+  }
+]

@@ -1,0 +1,26 @@
+https://github.com/neilburd/ExpressBeerApi
+this follows along the lesson plan and supliments info
+
+********** STEP 2 **********
+  create app directery
+    create models directory inside app
+      create beer.js
+
+    *****SHORTHAND
+       mkdir -p app/modles
+
+  -- Add the code in the lesoon plan to the beer.js
+
+*** NUMBER / MONEY *** in lesson
+  move decimal to make it easier to work with
+    i.e 10.99 to 1099
+
+  ** ADD TO server.js **
+  var Beer = require('./app/models/beer'); // require beer.js and asign it
+
+
+*********** STEP 3 **********
+--- next // goes to the next matching route in the controller
+
+<<<<< DO IT YOURSELF >>>>>>>
+  
