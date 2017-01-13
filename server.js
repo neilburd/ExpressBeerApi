@@ -1,6 +1,6 @@
 // server.js
 
-// BASE SETUP
+// SETUP
 // =============================================================================
 
 // call the packages we need
@@ -24,6 +24,8 @@ var port = process.env.PORT || 8080;        // set our port
 // =============================================================================
 var router = express.Router();              // get an instance of the express Router
 
+// This middleware is used for all requests. Test that it's working by looking at the node server output when making a request.
+// You can add authentication here...
 router.use(function(req, res, next) {
   console.log("Something is happening");
   next();
@@ -32,30 +34,25 @@ router.use(function(req, res, next) {
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res) {
-  res.json({ message: 'hooray! welcome to our api!' });   
-});
-router.get('/home', function(req, res) {
-  res.json({ message: 'hooray! welcome to our api!' });   
+  res.json({ message: 'Welcome to the beer api!' });   
 });
 
 // more routes for our API will happen here
 router.route('/beers')
 
-// create
-  .post(function(req, res) {
-    console.log(req.body);
-    Beer.create(req.body.beer)
-      .then(function(beer){
-        res.json({ message: 'Beer created!' + beer });
-      })
-  })
 
-// index
+  // index
   .get(function(req, res) {
     Beer.find().then(function(beers){
       res.json(beers);
     });
   });
+
+  // create
+  .post(function(req, res) {
+    // code here...
+  })
+
 
 router.route('/beers/:beer_id')
 
@@ -78,4 +75,4 @@ app.use('/api', router);
 // START THE SERVER
 // =============================================================================
 app.listen(port);
-console.log('Magic happens on port ' + port);
+console.log('Beers served on port ' + port);
