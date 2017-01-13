@@ -263,3 +263,8 @@ Namespacing form data can be achieved by typing beer[name] as a key, for example
 - How do we use middleware that is executed on each request?
 
 - How can we have our app use multiple sets of routes?
+
+## Resources
+- https://github.com/ga-wdi-pvd/express-api
+- https://expressjs.com/en/api.html#router
+- https://devcenter.heroku.com/articles/mongolab#getting-your-connection-uri
