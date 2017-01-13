@@ -148,13 +148,55 @@ Now that you have exported (exposed) this model, where should you then call `req
 
 ## Step 3 - CRUD!
 
-We are going to use the Express Router to help define our routes. The first set of routes we are going to create are the index and create route, which both will be at `/api/beers`
+Before we jump right in, let's take a moment to review and learn more about what's going on under the hood with the router.
 
-Before we get started, take a look at the `router.use` call. That middleware gets called each time a route is visited, and is a good place for something like user authentication. We are not going to cover that today, but it would be something good to investigate, as you don't want anyone hacking your beer collection!
+When an incoming request comes in, we want our router to send that request to the appropriate route, execute the appropriate code, and give the appropriate response.
+
+### Review Req, Res, Next and Response Handlers
+
+So what are these `req, res and next` objects that we see from time to time when dealing with routes?
+
+The `req` object is a
+[http.IncomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage)
+object. The `res` object is
+[http.ServerResponse](https://nodejs.org/api/http.html#http_class_http_serverresponse)
+object. These are what we used in the node HTTP server. What about `next`?
+
+> More than one callback function can handle a route (make sure you specify the
+> next object).
+>
+> – [Express routing](http://expressjs.com/en/guide/routing.html)
+
+That means that there can be **more than one step** when processing a single request. In fact,
+that's how Express keeps boilerplate to a minimum; we did something similar with
+`before_filter`s in Rails. Common functionality, like error handling, can be
+extracted into a middleware and run on any request you like. However, you
+**must** use `next` to propagate errors onward.
+
+Likewise, `res.json` signals to Express that we're done working on our response.
+It's analogous to Rails' `render` method. If you don't use a **terminal
+handler**, Express will keep the connection open waiting for one. You and
+Express will both be frustrated and confused. Here's a list of terminal
+handlers. You will use `res.json` and `res.sendStatus` most frequently.
+
+| Response method      | What it means                                                                         |
+|:---------------------|:--------------------------------------------------------------------------------------|
+| `res.json(jsObject)` | Send a JSON response.                                                                 |
+| `res.redirect()`     | Redirect a request.                                                                   |
+| `res.sendStatus()`   | Set the response status code and send its string representation as the response body. |
+
+
+### Adding Middleware to our app
+
+Take a look at the `router.use` call. That middleware gets called each time a route is visited, and is a good place for something like user authentication. We are not going to cover that today, but it would be something good to investigate, as you don't want anyone hacking your beer collection!
 
 The call to `next()` goes to the next matching middleware, in this case, our RESTful routes that we are going to setup. If you notice your app is hanging, then somewhere, some middleware may not be passing on to the next piece of middleware. Read more about Express middleware [here](http://expressjs.com/en/guide/using-middleware.html)
 
 So ***if you want something to happen on every request, implement `router.use`***!
+
+### Using the Express Router
+
+We are going to use the Express Router to help define our routes. The first set of routes we are going to create are the index and create route, which both will be at `/api/beers`
 
 ## Break!
 
