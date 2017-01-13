@@ -92,13 +92,15 @@ var BeerSchema = new Schema({
 module.exports = mongoose.model('Beer', BeerSchema);
 ```
 
+Why did we choose Number for price? 
+
+> Dealing with monetary data can be a tricky thing. Read up on the topic in the context of MongoDB [here](https://docs.mongodb.com/manual/tutorial/model-monetary-data/). I prefer the Scale Factor approach for simplicity, where the price is stored as a number. The monetary value is multiplied by a power of 10 to ensure the precision you desire, then stored in the database. For example, a price of 9990 in our database signifies a real-world price of 9.99 with precision up to one tenth of a cent. You may also want to store the currency of i.e. "USD".
+
 Now that you have exported (exposed) this model, where should you then call `require` along with the name of the model?
 
 ## Step 3 - CRUD!
 
 We are going to use the Express Router to help define our routes. The first set of routes we are going to create are the index and create route, which both will be at `/api/beers`
-
-To
 
 Before we get started, take a look at the `router.use` call. That middleware gets called each time a route is visited, and is a good place for something like user authentication. We are not going to cover that today, but it would be something good to investigate, as you don't want anyone hacking your beer collection!
 
