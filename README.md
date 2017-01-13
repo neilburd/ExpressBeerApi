@@ -43,15 +43,15 @@ Our Beer API will:
 
 To get started, we need to:
 
- - Define our Node packages
+ - Prepare our environment and install dependencies
 
- - Start our Node server
-
- - Define our model
+ - Start our servers: Node and MongoD (if it's not running)
+ 
+ - Define our Schema and our model
 
  - Declare our routes using the Express Router
 
- - and the Text our API
+ - Write our CRUD functionality, testing along the way 
 
 ### Preparing our environment
 
