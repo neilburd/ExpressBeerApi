@@ -146,7 +146,7 @@ Why did we choose Number for price?
 
 Now that you have exported (exposed) this model, where should you then call `require` along with the name of the model?
 
-## Step 3 - CRUD!
+## Step 3 - CRUD! (Review & Learn: 15 minutes)
 
 Before we jump right in, let's take a moment to review and learn more about what's going on under the hood with the router.
 
