@@ -29,7 +29,7 @@ To get started, we need to:
 
 Skip the frontend! We are going to be returning JSON data, which is how real-world APIs communicate.
 
-Using the PostMan app, we will create the appropriate request and fire it off to our app. Another way to make requests is by using the command line tool cURL.
+Using the Postman app, we will create the appropriate request and fire it off to our app. Another way to make requests is by using the command line tool cURL.
 
 ## Step 1 - Set up
 
@@ -49,21 +49,54 @@ Then, within server.js, setup Mongoose, Express and body-parser to handle POSTed
 
 We are going to create one model to start off with, called Beer. The Beer model will have a name, kind and price. What do you think the datatype for price should be?
 
+Create the model in the app/models directory.
+
+Try to write the schema and model setup code from memory before looking at the solution below:
+
+
+
+```
+var mongoose = require("mongoose");
+var Schema = mongoose.Schema;
+
+var BeerSchema = new Schema({
+  name: String,
+  kind: String,
+  price: Number
+});
+
+module.exports = mongoose.model('Beer', BeerSchema);
+```
+
 ## Step 3 - CRUD!
+
+We are going to use the Express Router to help define our routes. The first set of routes we are going to create are the index and create route, which both will be at `/api/beers`
 
 ### Routes with /api/beers
 
 #### Index
 
+What Mongoose find command should we use to find all of a certain collection?
+
 #### Create
+
+What method do we call on the model to create a new record?
 
 ### Routes with /api/beers/:id
 
+Next, we will look at the specific record routes: `show`, `update`, and `destroy`
+
 #### Show
+
+What method should we use to find one member of a collection?
 
 #### Update
 
+We can combine the find and update operations into one operation with this command...
+
 #### Destroy
+
+By calling this command on the model, and passing a key: value pair, we can remove a single item from a collection.
 
 ## Step 4 - Test!
 
@@ -72,9 +105,12 @@ Use Postman or cURL to make requests to the api. If you are console logging, che
 ## Bonus: Deploy to Heroku
 
  - Login to Heroku via your terminal (`heroku login`)
+
  - Create your app with `heroku create`
+
  - Provision the MongoLab add on: `heroku addons:create mongolab:sandbox` [more...](https://elements.heroku.com/addons/mongolab)
    - You may need your MongoLab connection URI: Get it by following [these steps](https://devcenter.heroku.com/articles/mongolab#getting-your-connection-uri)
+
  - Or, get a Mongo database running with [MongoLab](https://mlab.com/)
    - setup an environment varialbe locally with your MongoLab URI
      - `export MONGOLAB_URI="mongodb://example:example@something.mongolab.com:...."`

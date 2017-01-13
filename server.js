@@ -11,7 +11,7 @@ var bodyParser = require('body-parser');
 var mongoose = require("mongoose");
 mongoose.connect('mongodb://localhost/beer_api')
 
-var Beer = require('./app/models/beer');
+// set up a variable to hold our model here...
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -32,10 +32,7 @@ router.use(function(req, res, next) {
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res) {
-  res.json({ message: 'hooray! welcome to our api!' });   
-});
-router.get('/home', function(req, res) {
-  res.json({ message: 'hooray! welcome to our api!' });   
+  res.json({ message: 'Welcome to the beer api!' });   
 });
 
 // more routes for our API will happen here
@@ -43,30 +40,33 @@ router.route('/beers')
 
 // create
   .post(function(req, res) {
-    console.log(req.body);
-    Beer.create(req.body.beer)
-      .then(function(beer){
-        res.json({ message: 'Beer created!' + beer });
-      })
+    // code here
   })
 
 // index
   .get(function(req, res) {
-    Beer.find().then(function(beers){
-      res.json(beers);
-    });
+    // code here    
   });
+
 
 router.route('/beers/:beer_id')
 
   // show
+  .get(function(req, res) {
+    // code here
+  })
 
   // update
+  .put(function(req, res) {
+    // code here
+  })
 
   // destroy
+  .delete(function(req, res) {
+    // code here
+  })
 
-
-
+// View all routes
 router.get("/routes", function(req, res){
   console.log(router.stack);
   res.json(router.stack);
@@ -78,4 +78,4 @@ app.use('/api', router);
 // START THE SERVER
 // =============================================================================
 app.listen(port);
-console.log('Magic happens on port ' + port);
+console.log('Beer is being served on port ' + port);
