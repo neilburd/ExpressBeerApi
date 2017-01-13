@@ -10,7 +10,7 @@ var bodyParser = require('body-parser');
 var mongoose   = require('mongoose');
 var Beer       = require('./app/models/beer'); // require beer.js
 
-mongoose.connect('mongodb://localhost/beer_api');
+mongoose.connect( process.env.MONGODB_URI || 'mongodb://localhost/beer_api');
 
 // configure app to use bodyParser()
 app.use(bodyParser.urlencoded({ extended: true }));

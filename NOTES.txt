@@ -23,4 +23,37 @@ this follows along the lesson plan and supliments info
 --- next // goes to the next matching route in the controller
 
 <<<<< DO IT YOURSELF >>>>>>>
-  
+
+*********////
+writing node_modules to the git .gitignore
+*********////
+echo "node_modules+ >> .gitignore
+
+Launching to Heroku
+
+add Procfile
+//// echo writes to file
+echo "web: node server.js" >> Procfile
+
+ADD after dependencies in package.json
+    "engines": {
+      "node": "4.6.2"
+    }
+
+
+!!!! neil-beer-api
+heroku create <create name>
+
+heroku config:set NODE_ENV=production --app <your heroku app name>
+
+heroku addons:create mongolab
+
+///// change the db
+
+/////
+heroku config:set MONGODB_URI=<production URI returned>
+
+heroku config:set MONGOLAB_URI=mongodb://neilburd:Dani3lBjarn1@ds163738.mlab.com:63738/neil-beer-api
+
+add to connection:
+  mongoose.connect( MONGODB_URI || 'mongodb://localhost/beer_api');
