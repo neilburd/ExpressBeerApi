@@ -53,7 +53,9 @@ heroku addons:create mongolab
 /////
 heroku config:set MONGODB_URI=<production URI returned>
 
-heroku config:set MONGOLAB_URI=mongodb://neilburd:Dani3lBjarn1@ds163738.mlab.com:63738/neil-beer-api
+heroku config:set MONGOLAB_URI=mongodb://<username>:<passwords>@ds163738.mlab.com:63738/neil-beer-api
 
 add to connection:
   mongoose.connect( MONGODB_URI || 'mongodb://localhost/beer_api');
+
+git push heroku master
