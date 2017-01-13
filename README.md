@@ -1,4 +1,25 @@
-##Beer Api
+[![General Assembly Logo](https://camo.githubusercontent.com/1a91b05b8f4d44b5bbfb83abac2b0996d8e26c92/687474703a2f2f692e696d6775722e636f6d2f6b6538555354712e706e67)](https://generalassemb.ly/education/web-development-immersive)
+
+# Express as an API
+
+Express, like Rails, can be used as an API. In fact, building APIs in Express,
+especially those that use MongoDB for persistence, led to the rising popularity
+of Node.
+
+Express can be used for full-stack applications (those that have server-rendered
+views). However, we will use it purely as an API.
+
+A customized template for Express is available at [ga-wdi-boston/express-api-template](https://github.com/ga-wdi-boston/express-api-template).
+It includes authentication and common middlewares so that you can start developing an API right away. But today, we are going to build our own from scratch.
+
+## Prerequisites
+
+-   [ga-wdi-boston/node-http-server](https://github.com/ga-wdi-boston/node-http-server)
+-   [ga-wdi-boston/mongoose-crud](https://github.com/ga-wdi-boston/mongoose-crud)
+
+## Beer Api
+
+Let's face it, you have a hoarding problem. Luckily, it's not with cats, but with beers! Today you are thinking, wouldn't it be nice to have a beer api to CRUD all of my different beers?
 
 Using Express, Mongoose and Mongodb, we are going to build a RESTful API to CRUD our beer collection.
 
@@ -11,6 +32,13 @@ Our Beer API will:
  - Return JSON data
  - Bonus: be deployed on Heroku 
 
+## Learning Objectives
+ - Use Express Router to define multiple routes
+ - Namespace your routes so they originate from a different URL than `/`
+ - Attach middleware to your application that runs on each request
+ - Build a RESTful API using ME(A)N
+ - Talk to the API using Postman
+ 
 ## Getting Started
 
 To get started, we need to:
@@ -25,13 +53,33 @@ To get started, we need to:
 
  - and the Text our API
 
-### Calling the API
+### Preparing our environment
+
+1.  [Fork and clone](https://github.com/ga-wdi-boston/meta/wiki/ForkAndClone)
+    this repository.
+2.  Install dependencies with `npm install`.
+3.  Verify monogdb is runnning with `brew services list`
+    (Run `brew services restart mongodb` if not)
+    
+    **OPTIONAL setting up of a SECRET_KEY**
+4.  Set a SECRET_KEY in the environment. See below for command to set a SECRET_KEY
+5. For development and testing, set the SECRET_KEY from the root of your repository using:
+
+    `echo SECRET_KEY=$(/usr/bin/openssl rand -base64 66 | tr -d '\n') >>.env`
+
+6.  Install Nodemon by `npm install -g nodemon`. Nodemon will reload the
+application on a change to any file in the application. To start the express
+server, use `nodemon`. A secondary way is `npm start` together with a 'start' script within package.json.
+
+### Interacting with the API
 
 Skip the frontend! We are going to be returning JSON data, which is how real-world APIs communicate.
 
+Notice how, when building our controller functionality to respond to routes, we use the `res` object to respond with JSON:
+
 Using the Postman app, we will create the appropriate request and fire it off to our app. Another way to make requests is by using the command line tool cURL.
 
-## Step 1 - Set up
+## Step 1 - Set up (5 minutes)
 
 Initialize a new node.js application within the project directory. 
 
@@ -58,7 +106,7 @@ app.use(bodyParser.json());
 ```
 
 
-## Step 2 - Plan our model
+## Step 2 - Plan our model (10 minutes)
 
 We are going to create one model to start off with, called Beer. The Beer model will have a name, kind and price. What do you think the datatype for price should be?
 
@@ -110,7 +158,7 @@ So ***if you want something to happen on every request, implement `router.use`**
 
 ## Break!
 
-## Implementing CRUD
+## Implementing CRUD (60 minutes)
 
 Working in groups of 2-3, implement the following CRUD actions. When you are ready to test an action out, fire up Postman and get the api response.
 
@@ -148,7 +196,9 @@ For POSTing data, make sure you are using `x-www-form-urlencoded`
 
 Namespacing form data can be achieved by typing beer[name] as a key, for example. Then you have access to `req.body.beer`.
 
-## Bonus: Deploy to Heroku
+## Break!
+
+## Bonus: Deploy to Heroku (30 minutes)
 
  - Login to Heroku via your terminal (`heroku login`)
 
@@ -161,3 +211,13 @@ Namespacing form data can be achieved by typing beer[name] as a key, for example
    - setup an environment varialbe locally with your MongoLab URI
      - `export MONGOLAB_URI="mongodb://example:example@something.mongolab.com:...."`
      - does it work locally?
+
+## Review
+
+- What allows use to have our application mounted at /api?
+
+- How to we use the res object to respond with json?
+
+- How do we use middleware that is executed on each request?
+
+- How can we have our app use multiple sets of routes?
