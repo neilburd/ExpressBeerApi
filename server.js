@@ -42,9 +42,9 @@ router.route('/beers')
 // create
   .post(function(req, res) {
     // code here
-    Beer.create(req.body.beer).then((beer) => {
-      res.send(beer);
-    })
+    // Beer.create(req.body.beer).then((beer) => {
+    //   res.send(beer);
+    // })
   })
 
 // index
